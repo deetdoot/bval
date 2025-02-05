@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Welcome, {{ current_user.company_name }}</h2>
+    
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Actions</h5>
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('valuation') }}" class="btn btn-primary">New Valuation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Recent Valuations</h5>
+                </div>
+                <div class="card-body">
+                    {% if current_user.valuations %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Revenue</th>
+                                        <th>EBITDA</th>
+                                        <th>Enterprise Value</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for valuation in current_user.valuations|sort(attribute='date_created', reverse=True) %}
+                                    <tr>
+                                        <td>{{ valuation.date_created.strftime('%Y-%m-%d') }}</td>
+                                        <td>${{ "{:,.0f}".format(valuation.revenue) }}</td>
+                                        <td>${{ "{:,.0f}".format(valuation.ebitda) }}</td>
+                                        <td>${{ "{:,.0f}".format(valuation.valuation_result.enterprise_value) }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-primary">View Details</button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-center">No valuations yet. <a href="{{ url_for('valuation') }}">Create your first valuation</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

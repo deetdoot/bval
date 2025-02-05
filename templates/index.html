@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center min-vh-75">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 mb-4">Business Valuation Tool</h1>
+            <p class="lead mb-4">Get a professional valuation for your business in minutes</p>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3>Free Valuation</h3>
+                            <p>Upload your tax return and get an instant valuation based on industry standards</p>
+                            {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('valuation') }}" class="btn btn-primary">Start Valuation</a>
+                            {% else %}
+                                <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3>Features</h3>
+                            <ul class="list-unstyled">
+                                <li>✓ Multiple valuation methods</li>
+                                <li>✓ Industry comparisons</li>
+                                <li>✓ PDF tax return processing</li>
+                                <li>✓ Detailed analysis report</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>How It Works</h3>
+                            <div class="row mt-3">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <h5>1. Upload Data</h5>
+                                        <p>Enter your financial metrics or upload your tax return</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <h5>2. Analysis</h5>
+                                        <p>Our AI analyzes your data using multiple valuation methods</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <h5>3. Get Results</h5>
+                                        <p>Receive a detailed valuation report with insights</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

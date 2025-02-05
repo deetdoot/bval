@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2>Business Valuation Form</h2>
+            </div>
+            <div class="card-body">
+                <form id="valuationForm" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="taxReturn" class="form-label">Upload Tax Return (PDF)</label>
+                        <input type="file" class="form-control" id="taxReturn" name="tax_return" accept=".pdf">
+                        <small class="text-muted">Upload your tax return to auto-populate available fields</small>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="revenue" class="form-label">Revenue ($)</label>
+                            <input type="number" class="form-control" id="revenue" name="revenue" required step="0.01">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="ebitda" class="form-label">EBITDA ($)</label>
+                            <input type="number" class="form-control" id="ebitda" name="ebitda" required step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fcf" class="form-label">Free Cash Flow ($)</label>
+                            <input type="number" class="form-control" id="fcf" name="fcf" required step="0.01">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="growthRate" class="form-label">Growth Rate (%)</label>
+                            <input type="number" class="form-control" id="growthRate" name="growth_rate" required step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="wacc" class="form-label">WACC (%)</label>
+                            <input type="number" class="form-control" id="wacc" name="wacc" required step="0.01">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="peRatio" class="form-label">P/E Ratio</label>
+                            <input type="number" class="form-control" id="peRatio" name="pe_ratio" required step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="psRatio" class="form-label">P/S Ratio</label>
+                            <input type="number" class="form-control" id="psRatio" name="ps_ratio" required step="0.01">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Generate Valuation</button>
+                </form>
+
+                <div id="valuationResult" class="mt-4" style="display: none;">
+                    <h3>Valuation Results</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>Enterprise Value</th>
+                                    <td id="enterpriseValue"></td>
+                                </tr>
+                                <tr>
+                                    <th>Equity Value</th>
+                                    <td id="equityValue"></td>
+                                </tr>
+                                <tr>
+                                    <th>DCF Value</th>
+                                    <td id="dcfValue"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
